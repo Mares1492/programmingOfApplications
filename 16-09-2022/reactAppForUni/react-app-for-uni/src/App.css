@@ -1,75 +1,73 @@
 .App {
-  text-align: center;
+    text-align: center;
+
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
-.intro-text{
-  font-size: 8vmin;
-  font-family: "Droid Sans Mono Slashed", serif;
-  color: #ff2012
+.intro-text {
+    font-size: 8vmin;
+    font-family: "Droid Sans Mono Slashed", serif;
+    color: #ff2012;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 5s linear;
-  }
-  .intro-text{
-    animation: intro-text-animation infinite 5s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 5s linear;
+    }
+    .intro-text {
+        animation: intro-text-animation infinite 5s linear;
+    }
 }
 
 .App-header {
-  background-color: rgba(239,41,26,0.29);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: rgba(239, 41, 26, 0.29);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg) ;
-
-  }
-  50%{
-    transform: scale(1.7) rotate(180deg) ;
-  }
-  to {
-    transform: rotate(360deg) scale(1);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: scale(1.7) rotate(180deg);
+    }
+    to {
+        transform: rotate(360deg) scale(1);
+    }
 }
 
 @keyframes intro-text-animation {
-  0%{
-
-  }
-  25%{
-    transform: scale(0.7) translate(1em);
-    opacity: 0.7;
-  }
-  50%{
-    opacity: 0.5;
-    transform: scale(0.5) translate(2em, 1.5em);
-  }
-  75%{
-    opacity: 0.9;
-    transform: scale(0.9) translate(-1em,-0.7em);
-  }
-  90%{
-    transform: scale(1.1) translate(0.9em,-0.5em);
-
-  }
-  100%{
-  }
+    0% {
+    }
+    25% {
+        transform: scale(0.7) translate(1em);
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.5) translate(2em, 1.5em);
+    }
+    75% {
+        opacity: 0.9;
+        transform: scale(0.9) translate(-1em, -0.7em);
+    }
+    90% {
+        transform: scale(1.1) translate(0.9em, -0.5em);
+    }
+    100% {
+    }
 }

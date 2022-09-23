@@ -1,14 +1,15 @@
-const PopUp = ({opened})=>
+const PopUp = ({ opened }) => (
     <h1
         style={{
-            position:"absolute",
-            zIndex:1,
-            cursor:"crosshair",
-            color:"antiquewhite"
+            position: "absolute",
+            zIndex: 1,
+            cursor: "crosshair",
+            color: "#ff844e"
         }}
-        onClick={()=>opened(prev=>!prev)}
+        onClick={() => opened(prev => !prev)}
     >
-        Too much effort
+        Never Gonna Give You Up
     </h1>
+)
 
 export default PopUp

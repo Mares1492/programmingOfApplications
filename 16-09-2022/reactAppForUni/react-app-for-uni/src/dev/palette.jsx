@@ -1,17 +1,12 @@
-import React from 'react';
-import {
-    Category,
-    Component,
-    Variant,
-    Palette,
-} from '@react-buddy/ide-toolbox';
-import MUIPalette from "@react-buddy/palette-mui";
+import React from "react"
+import { Category, Component, Variant, Palette } from "@react-buddy/ide-toolbox"
+import MUIPalette from "@react-buddy/palette-mui"
 
 export const PaletteTree = () => (
     <Palette>
         <Category name="HTML">
             <Component name="a">
-                <Variant requiredParams={['href']}>
+                <Variant requiredParams={["href"]}>
                     <a>Link</a>
                 </Variant>
             </Component>
@@ -21,6 +16,6 @@ export const PaletteTree = () => (
                 </Variant>
             </Component>
         </Category>
-        <MUIPalette/>
+        <MUIPalette />
     </Palette>
-);
+)
