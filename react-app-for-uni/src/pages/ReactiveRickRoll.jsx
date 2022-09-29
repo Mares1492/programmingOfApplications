@@ -1,10 +1,8 @@
+import ShowCase from "../components/ShowCase"
 import logo from "../logo.svg"
-import "../App.css"
-import {useState,useEffect} from "react"
-import PopUp from "./PopUp"
-import ShowCase from "./ShowCase"
-import {TextField} from "@mui/material"
-
+import { TextField } from "@mui/material"
+import PopUp from "../components/PopUp"
+import React, { useEffect, useState } from "react"
 const timer = {
     color:"#bce8ff",
     backgroundColor:"#ff99c0",
@@ -13,7 +11,7 @@ const form = {
     borderRadius:"15% 100% 15% 100%",
     border:"3px solid rgba(143,61,90,0.3)"
 }
-function App() {
+export const ReactiveRickRoll = () => {
     const [show, setShow] = useState(false)
     const [input, setInput] = useState("")
     const [idleCount, setIdleCount] = useState(0)
@@ -27,8 +25,8 @@ function App() {
         return () => clearInterval(interval);
     },[input])
     return (
-        <div className="App">
-            < div style={timer}>{idleCount} seconds without typing</div>
+        <>
+            <div style={timer}>{idleCount} seconds without being smart</div>
             <ShowCase style = {form} showing={setShow} />
             <header className="App-header">
                 <img
@@ -52,8 +50,6 @@ function App() {
                 </div>
                 {show && <PopUp opened={setShow} />}
             </header>
-        </div>
+        </>
     )
 }
-
-export default App

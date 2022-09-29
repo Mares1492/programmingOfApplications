@@ -4,6 +4,8 @@ import "./index.css"
 import App from "./components/App"
 import { DevSupport } from "@react-buddy/ide-toolbox"
 import { ComponentPreviews, useInitial } from "./dev"
+import { BrowserRouter } from "react-router-dom"
+import ResponsiveAppBar from "./components/23.09.22/ResponsiveAppBar"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
@@ -12,7 +14,10 @@ root.render(
             ComponentPreviews={ComponentPreviews}
             useInitialHook={useInitial}
         >
-            <App />
+            <ResponsiveAppBar/>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
         </DevSupport>
     </React.StrictMode>
 )
