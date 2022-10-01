@@ -31,6 +31,11 @@ export const NotMain = () => {
         getData()
     }, [])
 
+    useEffect(()=>{
+        console.log(data)
+    },[data])
+
+    if (error) return <div className="not-main">{error}</div>
     if(!loading) return <div className="not-main">Some kind of meme fandom ☼</div>
     return <div >loading...</div>
 }

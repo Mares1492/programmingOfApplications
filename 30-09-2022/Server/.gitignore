@@ -1,9 +1,9 @@
-
-# dependencies
 /node_modules
 /.pnp
 .pnp.js
-
+/.idea/jsLibraryMappings.xml
+*.iml
+*.xml
 # testing
 /coverage
 
@@ -51,14 +51,14 @@ yarn-error.log*
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-# .idea/artifacts
-# .idea/compiler.xml
-# .idea/jarRepositories.xml
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
-# *.iml
-# *.ipr
+ .idea/artifacts
+ .idea/compiler.xml
+ .idea/jarRepositories.xml
+ .idea/modules.xml
+ .idea/*.iml
+ .idea/modules
+ *.iml
+ *.ipr
 
 # CMake
 cmake-build-*/
@@ -122,3 +122,5 @@ fabric.properties
 # See https://youtrack.jetbrains.com/issue/JBR-2257
 .idea/$CACHE_FILE$
 
+
+.env
