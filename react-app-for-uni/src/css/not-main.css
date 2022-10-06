@@ -1,0 +1,42 @@
+
+.not-main{
+    font-size: 25rem;
+    transition: all 200ms;
+    font-family: "Mongolian Baiti", "Amiri Quran", serif;
+    cursor: wait;
+    user-select: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .not-main {
+        animation: falling infinite 15s linear;
+    }
+}
+
+@keyframes falling {
+    0% {
+        transform: translateY(-1500px);
+    }
+
+    50%{
+        transform: translateY(300px);
+    }
+
+    55%{
+        transform: translateY(500px) rotateX(30deg) ;
+    }
+    60%{
+        transform: translateY(300px);
+    }
+    65%{
+        transform: translateY(400px);
+    }
+
+    75%{
+        transform: translateY(1500px);
+    }
+
+    100% {
+        transform: translateY(-1500px);
+    }
+}
