@@ -6,6 +6,7 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const cats = require('./routes/cats.routes')
 const dogs = require('./routes/dogs.routes')
+const todo = require('./routes/todo.routes')
 
 app.use(morgan('dev'))
 app.use(express.json())
@@ -15,10 +16,11 @@ const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}
 const main = async () => {
     await mongoose.connect(uri)
 }
-main().then(()=>console.log('Database connection established')).catch(err => console.log(err));
+main().then(()=>console.log('Database connection established')).catch(err => console.log(err))
 
 app.use('/cats', cats)
 app.use('/dogs', dogs)
+app.use('/todo', todo)
 
 app.get('/',(req,res) =>{
     res.send('Hello world!')
