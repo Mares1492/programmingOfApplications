@@ -1,6 +1,5 @@
 import "../css/not-main.css"
 import { useEffect, useState } from "react"
-import { DownloadingRounded } from "@mui/icons-material"
 export const NotMain = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);

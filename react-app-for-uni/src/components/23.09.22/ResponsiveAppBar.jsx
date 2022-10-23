@@ -17,8 +17,9 @@ import BatteryCharging60Icon from '@mui/icons-material/BatteryCharging60';
 import BatteryUnknownIcon from '@mui/icons-material/BatteryUnknown';
 import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
 import BatterySaverIcon from '@mui/icons-material/BatterySaver';
-import { useEffect } from "react"
-import { Link } from "@mui/material"
+import { useEffect,useContext } from "react"
+import { LoginForm } from "../LoginForm"
+import { TogglesContext } from "../../index"
 
 const pages = [
     {
@@ -35,15 +36,22 @@ const pages = [
         id: 3,
         route:"/not-main",
         name:"Not Main"
-    }];
+    },
+    {
+        id:4,
+        route: "/todo",
+        name:"Todo"
+    }
+]
 
-const settings = [<BatterySaverIcon/>, 'Logout'];
+
 
 
 const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [batteryStatus, setBatteryStatus] = useState(<BatteryUnknownIcon/>);
+    const {toggles} = useContext(TogglesContext)
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -62,6 +70,19 @@ const ResponsiveAppBar = () => {
         setBatteryStatus(<BatteryChargingFullIcon/>)
         setAnchorElUser(null);
     }
+
+
+    const [settings,setSettings] = useState([
+        {
+            label:<BatterySaverIcon />,
+            function: handleCloseUserMenu
+        },
+        {
+            label:"Sign In",
+            function:()=>toggles.setShowLogRegForm(true)
+
+        }
+    ])
 
     useEffect(()=>{
        setBatteryStatus(<BatteryCharging60Icon/>)
@@ -117,11 +138,11 @@ const ResponsiveAppBar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            <>{pages.map(page =>(
+                            {pages.map(page =>(
                                 <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                                    <Typography href={page.route} textAlign="center">{page.name}</Typography>
+                                    <Button href={page.route}  sx={{color:'black',fontWeight:"bold"}}>{page.name}</Button>
                                 </MenuItem>
-                            ))}</>
+                            ))}
                         </Menu>
                     </Box>
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -129,7 +150,7 @@ const ResponsiveAppBar = () => {
                         variant="h5"
                         noWrap
                         component="a"
-                        href="/"
+                        href=""
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -144,16 +165,16 @@ const ResponsiveAppBar = () => {
                         WeB Tra1ninG
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
-                        <>{pages.map(page =>(
+                        {pages.map(page =>(
                                 <Button
+                                    key={page.id}
                                     href={page.route}
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
                                     {page.name}
                                 </Button>
-                        ))}</>
+                        ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
@@ -178,11 +199,11 @@ const ResponsiveAppBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            <>{settings.map(setting => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                            {settings.map(setting => (
+                                <MenuItem key={setting.label} onClick={setting.function}>
+                                    <Button sx={{color:'black'}}>{setting.label}</Button>
                                 </MenuItem>
-                            ))}</>
+                            ))}
                         </Menu>
                     </Box>
                 </Toolbar>

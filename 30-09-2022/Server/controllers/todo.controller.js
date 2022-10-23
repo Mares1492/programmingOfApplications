@@ -1,5 +1,6 @@
 const e = require("express");
 const TODO = require("../models/todo.model");
+const TodoDto = require("../dtos/todo-dtos");
 
 exports.create = async (req, res) => {
     try {
@@ -13,7 +14,8 @@ exports.create = async (req, res) => {
 
 exports.read = async (req, res) => {
     try {
-        const todos = await TODO.find({}, { _id: 0, __v: 0 })
+        const todos = await TODO.find({})
+        //const todoDto = new TodoDto(todos)
         res.send(todos)
     }catch(e){
         res.status(500).json(e)
