@@ -8,7 +8,6 @@ exports.checkUser = (req, res, next) => {
         role: 'Owner',
     }
 
-    console.log('Time: ', Date.now())
     next()
 }
 

@@ -16,5 +16,8 @@ router.get('/:name', dogsController.findDog)
 router.post('/:name', dogsController.create)
 router.put('/:name', dogsController.update)
 router.delete('/:name', dogsController.delete)
+router.get('/alt-:name', dogsController.altSearchOne)
+router.get('/altget', dogsController.altSearchAll)
+
 
 module.exports = router

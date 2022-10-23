@@ -3,6 +3,7 @@ import logo from "../logo.svg"
 import { TextField } from "@mui/material"
 import PopUp from "../components/PopUp"
 import React, { useEffect, useState } from "react"
+import { LoginForm } from "../components/LoginForm"
 const timer = {
     color:"#bce8ff",
     backgroundColor:"#ff99c0",
@@ -30,6 +31,7 @@ export const ReactiveRickRoll = () => {
             <ShowCase style = {form} showing={setShow} />
             <header className="App-header">
                 <img
+                    style={{userSelect:"none"}}
                     src={logo}
                     className="App-logo"
                     alt="logo"
@@ -49,6 +51,7 @@ export const ReactiveRickRoll = () => {
                     {input}
                 </div>
                 {show && <PopUp opened={setShow} />}
+                <LoginForm/>
             </header>
         </>
     )
