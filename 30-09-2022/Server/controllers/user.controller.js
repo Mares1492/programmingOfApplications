@@ -44,7 +44,7 @@ exports.disconnect = async (req,res,next) => {
 
 exports.read = async (req, res) => {
     try {
-        const users = await User.find({}, { _id: 0, __v: 0 })
+        const users = await User.find({}, { _id: 0, __v: 0,password: 0,isActivated: 0,activationLink:0 })
         res.send(users)
     }catch(err){
         res.status(500).json(err)

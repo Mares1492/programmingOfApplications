@@ -1,11 +1,15 @@
 import "../App.css";
-import React, { createContext, useState } from "react"
+import React, { createContext, useContext, useEffect, useState } from "react"
 import { ReactiveRickRoll } from "../pages/ReactiveRickRoll";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { NotMain } from "../pages/NotMain";
 import { Main } from "../pages/Main";
 import { SemiMain } from "../pages/SemiMain";
 import { Todo } from "../pages/Todo"
+import { TogglesContext, UserContext } from "../index"
+import { LoginForm } from "./LoginForm"
+import AlertDialog from "./mui.garbage/AlertDialog"
+import { observer } from "mobx-react-lite"
 
 const themes = {
     light: {
@@ -18,19 +22,16 @@ const themes = {
     }
 };
 
-export const UserContext = createContext(null)
+
 export const ThemeContext = createContext(themes.light)
 
 function App() {
-
-    const[user,setUser] = useState({username:"Anon"});
-
-
     const location = useLocation()
     return (
         <div className="App">
             <ThemeContext.Provider value={themes.dark}>
-                <UserContext.Provider value={user}>
+                <AlertDialog/>
+                <LoginForm/>
                     <Routes location={location} key = {location.pathname}>
                         <Route path="/" element={<ReactiveRickRoll/>}/>
                         <Route path="/not-main" element={<NotMain />}/>
@@ -38,10 +39,9 @@ function App() {
                         <Route path="/semi-main" element={<SemiMain />}/>
                         <Route path="/todo" element={<Todo />}/>
                     </Routes>
-                </UserContext.Provider>
             </ThemeContext.Provider>
         </div>
     )
 }
 
-export default App
+export default observer(App)

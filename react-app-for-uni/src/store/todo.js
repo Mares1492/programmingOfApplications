@@ -18,7 +18,6 @@ class Todo{
         this.todos = this.todos.filter(todo=>todo!==td)
     }
     completeTodo(td){
-        console.log(td)
         this.todos = this.todos.map(todo =>todo === td?{...todo,completed:!todo.completed}:todo)
     }
     fetchTodos(){

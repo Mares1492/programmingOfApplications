@@ -5,15 +5,14 @@ import App from "./components/App"
 import { DevSupport } from "@react-buddy/ide-toolbox"
 import { ComponentPreviews, useInitial } from "./dev"
 import { BrowserRouter } from "react-router-dom"
-import ResponsiveAppBar from "./components/23.09.22/ResponsiveAppBar"
+import ResponsiveAppBar from "./components/mui.garbage/ResponsiveAppBar"
 import Store from "./store/store"
 import Toggles from "./store/toggles"
 
 const store = new Store()
-
 const toggles = new Toggles()
 
-export const Context = createContext({
+export const UserContext = createContext({
     store
 })
 export const TogglesContext = createContext({
@@ -28,14 +27,14 @@ root.render(
             ComponentPreviews={ComponentPreviews}
             useInitialHook={useInitial}
         >
-            <Context.Provider value={{ store }}>
+            <UserContext.Provider value={{ store }}>
                 <TogglesContext.Provider value={{ toggles }}>
                     <ResponsiveAppBar />
                     <BrowserRouter>
                         <App />
                     </BrowserRouter>
                 </TogglesContext.Provider>
-            </Context.Provider>
+            </UserContext.Provider>
         </DevSupport>
     </React.StrictMode>
 )

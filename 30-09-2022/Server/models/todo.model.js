@@ -4,7 +4,7 @@ const todoSchema = new mongoose.Schema({
     title: {type:String,required: true},
     date: String,
     importance: Number,
-    completed: Boolean
+    completed: {type:Boolean,default:false}
 })
 
 module.exports = mongoose.model('TODO', todoSchema)

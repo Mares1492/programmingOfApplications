@@ -8,14 +8,15 @@ const {authMiddleware} = require("../middlewares/auth.middleware");
 router.use(getTime)
 
 //new user controller ↓
-router.post('/register',
+router.post('/registration',
     body('email').isEmail(),
     body('password').isLength({min:6}),
     altUserController.registration)
 
-router.get('/activate/:link',altUserController.activate)
 router.post('/login',altUserController.login)
 router.post('/logout',altUserController.logout)
+
+router.get('/activate/:link',altUserController.activate)
 router.get('/refresh',altUserController.refresh)
 router.get('/users',authMiddleware,altUserController.getAllUsers)
 

@@ -13,7 +13,8 @@ exports.generateTokens = (payload)=>{
 
 exports.validateAccessToken = (token) =>{
     try {
-        return jwt.verify(token,process.env.JWT_ACCESS_SECRET)
+        const userData =  jwt.verify(token,process.env.JWT_ACCESS_SECRET)
+        return userData
     }catch (err){
         return null;
     }
@@ -21,7 +22,8 @@ exports.validateAccessToken = (token) =>{
 
 exports.validateRefreshToken = (token) =>{
     try {
-        return jwt.verify(token,process.env.JWT_REFRESH_SECRET)
+        const userData =  jwt.verify(token,process.env.JWT_REFRESH_SECRET)
+        return userData
     }catch (err){
         return null;
     }
