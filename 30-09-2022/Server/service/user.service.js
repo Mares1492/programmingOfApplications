@@ -53,6 +53,7 @@ exports.logout = async (refreshToken) =>{
     return await tokenService.removeToken(refreshToken);
 }
 exports.refresh = async (refreshToken) =>{
+    console.log(`so far so good ${refreshToken}`)
     if (!refreshToken){
         throw ApiError.UnauthorizedError()
     }

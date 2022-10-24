@@ -12,6 +12,6 @@ export default class AuthService{
         return $user.post('/logout')
     }
     static async fetchUsers(){
-        return $user.get('/users')
+        return $user.get('/all')
     }
 }

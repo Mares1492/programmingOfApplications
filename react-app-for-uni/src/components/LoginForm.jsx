@@ -1,25 +1,38 @@
 import { useContext, useState } from "react"
-import { Context, TogglesContext } from "../index"
+import { UserContext, TogglesContext } from "../index"
 import { Button, Modal, TextField } from "@mui/material"
 import Box from "@mui/material/Box"
 import { observer } from "mobx-react-lite"
 
-const textFieldStyle = {
-    backgroundColor:"white",
-    color:"black",
-    borderRadius:"13%"
-}
+
 const myButton = {
     borderBottom:"2px black solid",
     color:"black",
-    borderRadius: "0"
+    borderRadius: "0",
+    '&:hover': {
+        color:"#710C04"
+    }
 }
 
 export const LoginForm = observer(() => {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    const {store} = useContext(Context)
+    const {store} = useContext(UserContext)
     const {toggles} = useContext(TogglesContext)
+
+    const handleLogin = ()=>{
+        store.login(email,password)
+            .then(()=>setEmail(''))
+            .then(()=>setPassword(''))
+            .then(()=>toggles.setShowLogInWelcomeMessage(true))
+            .then(()=>toggles.setShowLogRegForm(false))
+    }
+    const handleRegistration = () =>{
+        store.registration(email,password)
+            .then(()=>setEmail(''))
+            .then(()=>setPassword(''))
+            .then(()=>toggles.setShowLogRegForm(false))
+    }
 
     return (
         <Modal
@@ -35,16 +48,15 @@ export const LoginForm = observer(() => {
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
                     transition:"all 600ms",
-                    //'&:hover': {
-                   //     transform:"scale(1.1)"
-                   // },
+                    '&:hover': {
+                       transform:"scale(1.1)"
+                   },
                     top: 0,
                     margin:'auto',
                     left: 0,
                     maxWidth:"50%",
                     backgroundColor:"white",
-                    border:"solid black 2px",
-                    borderRadius:"3%"
+                    border:"solid black 2px"
                 }}
                 noValidate
                 autoComplete="off"
@@ -67,10 +79,11 @@ export const LoginForm = observer(() => {
                     onChange={e=>setPassword(e.target.value)}
                     value={password}
                     type="password"
+
                 />
                 <Box>
-                    <Button sx = {myButton} onClick={()=>store.login(email,password)}>Log in</Button>
-                    <Button sx = {myButton} onClick={()=>store.registration(email,password)}>Register</Button>
+                    <Button sx = {myButton} onClick={()=>handleLogin()}>Log in</Button>
+                    <Button sx = {myButton} onClick={()=>handleRegistration()}>Register</Button>
                 </Box>
             </Box>
         </Modal>

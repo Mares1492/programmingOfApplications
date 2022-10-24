@@ -3,11 +3,12 @@ import {Button} from "@mui/material"
 
 const max = 40
 
-const ShowCase = ({style, showing}) => {
+const ShowCase = ({showing}) => {
     const [size, changeSize] = useState(0)
     const moveDown = () => size > 0 && changeSize(0)
     useEffect(() => {
         (size > max/2 &&size<max/1.5) ? showing(true) : showing(false)
+        // eslint-disable-next-line
     }, [size])
     return (
         <div

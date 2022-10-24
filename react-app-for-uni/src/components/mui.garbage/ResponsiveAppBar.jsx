@@ -18,8 +18,8 @@ import BatteryUnknownIcon from '@mui/icons-material/BatteryUnknown';
 import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
 import BatterySaverIcon from '@mui/icons-material/BatterySaver';
 import { useEffect,useContext } from "react"
-import { LoginForm } from "../LoginForm"
-import { TogglesContext } from "../../index"
+import { TogglesContext, UserContext } from "../../index"
+import { observer } from "mobx-react-lite"
 
 const pages = [
     {
@@ -52,6 +52,14 @@ const ResponsiveAppBar = () => {
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [batteryStatus, setBatteryStatus] = useState(<BatteryUnknownIcon/>);
     const {toggles} = useContext(TogglesContext)
+    const {store} = useContext(UserContext)
+
+    useEffect(()=>{
+        if (localStorage.getItem( ('token'))){
+            store.checkAuth()
+        }
+    },[])
+
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -72,6 +80,7 @@ const ResponsiveAppBar = () => {
     }
 
 
+
     const [settings,setSettings] = useState([
         {
             label:<BatterySaverIcon />,
@@ -79,14 +88,63 @@ const ResponsiveAppBar = () => {
         },
         {
             label:"Sign In",
-            function:()=>toggles.setShowLogRegForm(true)
+            function:()=>{
+                toggles.setShowLogRegForm(true)
+                handleCloseUserMenu()
+            }
 
         }
     ])
 
+
+    const handleSetSettingsToOut=()=>{
+        setSettings([
+            {
+                label:<BatterySaverIcon />,
+                function: handleCloseUserMenu
+            },
+            {
+                label:"Sign Out",
+                function:()=>{
+                    store.logout()
+                    handleSetSettingsToIn()
+                    handleCloseUserMenu()
+                }
+            }]
+        )
+    }
+
+    const handleSetSettingsToIn=()=>{
+        setSettings([
+            {
+                label:<BatterySaverIcon />,
+                function: handleCloseUserMenu
+            },
+            {
+                label:"Sign In",
+                function:()=>{
+                    toggles.setShowLogRegForm(true)
+                    handleSetSettingsToOut()
+                    handleCloseUserMenu()
+                }
+
+            }
+        ])
+    }
+
+    const handleChangeSettings = ()=>{
+        if (store.user.isAuth){
+            handleSetSettingsToOut()
+        }else {
+            handleSetSettingsToIn()
+        }
+    }
+
+
     useEffect(()=>{
        setBatteryStatus(<BatteryCharging60Icon/>)
     },[])
+
     return (
         <AppBar style ={{backgroundColor:"black"}} position="static">
             <Container maxWidth="xl">
@@ -145,7 +203,6 @@ const ResponsiveAppBar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
                         variant="h5"
                         noWrap
@@ -178,7 +235,8 @@ const ResponsiveAppBar = () => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Monkey">
+                        <div style={{fontSize:"x-large",fontFamily:"fantasy",fontStyle:"oblique"}}>{store.isAuth?"Bro":"Unauthorised"}</div>
+                        <Tooltip title={store.isAuth?store.user.email:"Monkey"}>
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <Avatar alt="Ape" src="https://beebom.com/wp-content/uploads/2022/02/Featured.jpg?w=750&quality=75" />
                             </IconButton>
@@ -198,6 +256,7 @@ const ResponsiveAppBar = () => {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
+                            onClick = {handleChangeSettings}
                         >
                             {settings.map(setting => (
                                 <MenuItem key={setting.label} onClick={setting.function}>
@@ -211,4 +270,4 @@ const ResponsiveAppBar = () => {
         </AppBar>
     );
 };
-export default ResponsiveAppBar;
+export default observer(ResponsiveAppBar);
